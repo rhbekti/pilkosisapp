@@ -24,10 +24,38 @@ class M_vote extends CI_Model
         $this->db->where('id',$post);
         $this->db->delete('setting');
     }
-    public function cek_vote_login()
+    public function insert_vote($post,$query,$waktu)
     {
-        $post = $this->input->post(null,True);
-        var_dump($post);
+        $data = [
+            'id' => '',
+            'id_user' => $query->id,
+            'no_kandidat' => $post['vote'],
+            'waktu' => $waktu
+        ];
+        $this->db->insert('data_voting',$data);
+    }
+    public function update_kandidat_suara($post)
+    {
+        $data = [
+            'jumlah_suara' => $post->jumlah_suara + 1
+        ];
+        $this->db->where('id',$post->id);
+        $this->db->update('kandidat',$data);
+    }
+    public function update_status_user($param)
+    {
+        $data = [
+            'status' => 2
+        ];
+        $this->db->where('id',$param);
+        $this->db->update('user',$data);
+    }
+    public function cek_sdah_voting($post = null)
+    {
+        if($post != null){
+            $this->db->where('id_user',$post);
+        }
+        return $this->db->get('data_voting');
     }
 
 }

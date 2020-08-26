@@ -43,6 +43,7 @@ class Login extends CI_Controller
 					'level' => $user->level,
 					'kelas' => $user->namakelas,
 				];
+				$this->M_user->update_status($param['id']);
 				$this->session->set_userdata($param);
 				redirect('/Dashboard');
 			}else{

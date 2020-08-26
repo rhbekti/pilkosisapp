@@ -75,12 +75,6 @@ $menu = $this->session->userdata('menu');
       <i class="fas fa-fw fa-home"></i>
       <span>Beranda</span></a>
   </li>
-  <!-- Menu Data Pengguna -->
-  <li class="nav-item <?= ($menu == 'voting') ? ('active bg-success') : (''); ?>">
-    <a class="nav-link" href="<?=site_url('/Voting');?>">
-      <i class="fas fa-fw fa-user-friends"></i>
-      <span>Kandidat</span></a>
-  </li>
   <!-- Menu Data Panduan -->
   <li class="nav-item <?= ($menu == 'user_panduan') ? ('active bg-success') : (''); ?>">
     <a class="nav-link" href="<?=site_url('/Panduan_user');?>">

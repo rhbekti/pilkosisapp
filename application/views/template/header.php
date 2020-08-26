@@ -26,9 +26,23 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?=base_url()?>/assets/sbadmin/vendor/summernote/summernote-bs4.css">
 
+  <style>
+    #load { height: 100%; width: 100%; }
+    #load {
+      position    : fixed;
+      z-index     : 99999; /* or higher if necessary */
+      top         : 0;
+      left        : 0;
+      overflow    : hidden;
+      text-indent : 100%;
+      font-size   : 0;
+      opacity     : 0.6;
+      background  : #E0E0E0  url(<?php echo base_url('assets/images/load.gif');?>) center no-repeat;
+    }
+  </style>
 </head>
 
 <body id="page-top">
-
+<!-- <div id="load">Please wait ...</div> -->
   <!-- Page Wrapper -->
   <div id="wrapper">

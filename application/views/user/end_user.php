@@ -1,13 +1,35 @@
 <script>
     $(document).ready(function(){
-        const flashData = $('.flashdata').data('flashdata');
-        if(flashData){
-            Swal.fire({
-                title : 'Pemberitahuan',
-                text : flashData,
-                type : 'error'
+        load_vote();
+        function load_vote()
+        {
+            $.ajax({
+                url : "<?=base_url('/Dashboard/get_data_vote');?>",
+                method : 'post',
+                async : false,
+                dataType : 'json',
+                success : function(respon){
+                    $('#totalvote').html(respon);
+                }
             });
         }
+         //sweet alert
+         const Aksi = $('.flashdata').data('aksi');
+                const det = $('.infoaksi').data('info');
+                if(Aksi == 'sukses'){
+                    Swal.fire({
+                        title : 'Informasi',
+                        text : det,
+                        type: 'success'
+                    });   
+                }else if(Aksi == 'error'){
+                    Swal.fire({
+                        title : 'Informasi',
+                        text  : det,
+                        type : 'error'
+                    });
+                }
+
     });
 </script>
 </body>

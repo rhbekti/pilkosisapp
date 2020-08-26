@@ -8,6 +8,14 @@ class M_user extends CI_Model
         $this->db->join('datakelas','datakelas.kodekelas = user.kelas');
         return $this->db->get('user');
     }
+    public function update_status($post)
+    {
+        $data = [
+            'status' => 1
+        ];
+        $this->db->where('id',$post);
+        $this->db->update('user',$data);
+    }
     public function get($id = null){
         if($id != null){
             $this->db->where('id',$id);

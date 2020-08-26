@@ -51,6 +51,8 @@
   <script src="<?=base_url()?>/assets/sbadmin/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="<?=base_url()?>/assets/sbadmin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+ <!-- chat script -->
+ <script src="<?php echo base_url('node_modules/socket.io/node_modules/socket.io-client/socket.io.js');?>"></script>
 
   <!-- Page level plugins -->
   <script src="<?=base_url()?>/assets/sbadmin/vendor/chart.js/Chart.min.js"></script>
