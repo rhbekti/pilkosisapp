@@ -54,18 +54,21 @@
            <div class="row">
              <div class="col-12 text-center mt-3">
                <h4>Visi </h4>
-               <p><?=$ketua->visi;?></p>
+               <p><?= $ketua->visi; ?></p>
              </div>
              <div class="col-12 text-center mt-3">
                <h4>Misi </h4>
-               <p><?=$ketua->misi;?></p>
+               <p><?= $ketua->misi; ?></p>
              </div>
              <div class="col-12 text-center mt-3">
                <h4>Proker </h4>
-               <p><?=$ketua->proker;?></p>
+               <p><?= $ketua->proker; ?></p>
              </div>
              <div class="col-12 text-center mt-3">
-               <a href="<?=site_url('/Voting');?>" class="btn btn-primary float-right">Kembali</a>
+               <form action="<?= site_url('/Voting/voting_kandidat') ?>" method="post">
+                 <input type="hidden" name="idpemilih" value="<?= $user['id']; ?>">
+                 <button type="submit" class="btn btn-primary float-right">Kembali</button>
+               </form>
              </div>
            </div>
          </div>
@@ -77,4 +80,3 @@
 
  </div>
  <!-- End of Main Content -->
- 

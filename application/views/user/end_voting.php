@@ -2,12 +2,11 @@
     $(document).ready(function() {
         
         $.ajax({
-            url: "<?= site_url('/admin/Kandidat/get_data'); ?>",
+            url: "<?= site_url('/Voting/get_data_kandidat'); ?>",
             method: 'post',
             dataType: 'json',
             async: false,
-            success: function(respon) {
-                let data = respon.data;
+            success: function(data) {
                 $.each(data, function(i, item) {
                     $('#kartu-kandidat').append(`<div class="col-12 col-md-3 text-center">
                     <figure class="figure">

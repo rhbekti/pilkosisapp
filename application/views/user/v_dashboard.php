@@ -7,7 +7,10 @@
         <div class="card-body">
           <h5 class="card-title font-weight-bold">Hallo <?=$user['nama'];?></h5>
           <p class="card-text">Selamat Datang di Pilkosis SMK Negeri 1 Kebumen</p>
-          <a href="<?=site_url('/Voting');?>" class="btn btn-primary d-block">Voting</a>
+          <form action="<?=site_url('/Voting/voting_kandidat')?>" method="post">
+            <input type="hidden" name="idpemilih" value="<?=$user['id'];?>">
+            <button type="submit" class="btn btn-primary d-block w-100">Voting</button>
+          </form>
         </div>
       </div>
     </div>
@@ -40,7 +43,6 @@
                   <th>&nbsp;</th>
                 </tr>
               </thead>
-
            </table>
           </div>
         </div>
