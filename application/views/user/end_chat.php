@@ -1,93 +1,132 @@
+<!-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> -->
 <script>
     $(document).ready(function() {
-        
-        load_pesan();
-        function load_pesan()
-        {
-            $.ajax({
-                url : "<?= site_url('/Chat/user_list');?>",
-                method : 'post',
-                dataType : 'json',
-                async : false,
-                success : function(data){
-                    $.each(data,function(i,item){
-                        $('#tbluser').append(`
-                        <tr>
-                        <td>`+item.nama+`</td>
-                        <td><i class="`+item.icon+`"></i></td></tr>`);
-                    });
-                } 
-            })
-        }
-        
-        $('#kirim').click(function() {
+        show_chat();
+        // // Enable pusher logging - don't include this in production
+        // Pusher.logToConsole = true;
 
+        // var pusher = new Pusher('5169da6fd6f25da82390', {
+        //     cluster: 'ap1',
+        //     forceTLS: true
+        // });
+
+        // var channel = pusher.subscribe('my-channel');
+        // channel.bind('my-event', function(data) {
+        //     if (data.message === 'success') {
+        //         show_chat();
+        //     }
+        // });
+
+
+        function show_chat() {
+            $.ajax({
+                url: "<?= site_url('/Chat/get_chat'); ?>",
+                method: 'post',
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                   if(data.length > 0){
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<div class="row mt-3">' +
+                            '<div class="col-2 col-md-2 text-center">' +
+                            '<img src="<?= base_url('/assets/images/'); ?>default.png" class="img-fluid rounded-circle" style="height:40px;width:40px;">' +
+                            '</div>' +
+                            '<div class="col-10 col-md-10">'+
+                            '<div class ="alert alert-success"  role="alert">'+
+                            '<p>'+data[i].nama+'</p>'+
+                            '<p>'+data[i].pesan+'</p>'+
+                            '<hr>'+
+                            '<small>'+data[i].waktu+'</small>'+
+                            '</div>'+
+                        '</div>' +
+                        '</div>'
+                    }
+                    $('#total-pesan').val(data.length);
+                    $('#chatku').html(html);
+                   } else{
+                       $('#chatku').html('<div class ="alert alert-success"  role="alert">'+
+                            '<p class="text-center">Belum ada Chat</p>'+
+                            '</div>');
+                   }
+                }
+            });
+        }
+
+        
+        function kirim_chat()
+        {
             var pesan = {
                 nama : $('#nama').val(),
                 pesan: $('#pesan').val()
             }
             $.ajax({
-                type: "post",
-                url: "<?= base_url('/Chat/submit_pesan'); ?>",
-                data: pesan,
+                url : "<?=site_url('/Chat/submit_pesan');?>",
+                method : 'POST',
+                data : pesan,
+                async: true,
                 dataType: 'json',
                 cache: false,
-                success: function(data) {
+                success : function(data){
                     console.log(data);
-                    $('#pesan').val('');
-
                     if (data.success == true) {
-                        // var socket = io.connect('http://' + window.location.hostname + ':3000');
-                        // $('#chatku').append('Oke');
-                        
                         $('#chatku').append(`<div class="row mt-2">
-                        <div class="col-2  text-center">
+                        <div class="col-2 text-center">
                             <img src="<?= base_url('/assets/images/');?>default.png" class="img-fluid rounded-circle" alt="foto" style="width: 40px;height:40px;">
                         </div>
                         <div class="col-10">
-                            <ul class="list-group" id="chatanku">
-                                <li class="list-group-item border-0 bg-success text-white">
+                            <div class ="alert alert-success"  role="alert">
                                 <p>`+data.nama+`</p>
                                 `+data.pesan+`
-                                </li>
-                            </ul>
+                                <hr>
+                                <small>`+data.waktu+`</small>
+                            </div>
                         </div>
                     </div>`);
                         $('#notif_audio')[0].play();
                         $("#chatku").stop().animate({ scrollTop: $("#chatku")[0].scrollHeight}, 1000);
-                        // socket.emit('new_message', {
-                        //     pesan: data.pesan
-                        // });
+                        
+                        $('#pesan').val("");
                     } else if (data.success == false) {
                         $('#nama').val(data.nama);
                         $('#pesan').val(data.pesan);
                     }
-                },
-                error: function(xhr, status, error) {
-                    alert(error);
-                },
+                    
+                }
             });
-
+        }
+        $('#tombol-kirim').on('click',function(){
+            kirim_chat();
         });
-        // var socket = io.connect('http://' + window.location.hostname + ':3000');
-
-        // socket.on('new_count_message', function(data) {
-
-        //     $("#new_count_message").html(data.new_count_message);
-        //     $('#notif_audio')[0].play();
-
-        // });
-        // socket.on( 'new_message', function( data ) {
-        
-        // $( "#chatanku" ).prepend(`<li class="list-group-item border-0 bg-success text-white">
-        //                         <p>`+data.nama+`</p>
-        //                         `+data.pesan+`
-        //                         </li>`);
-        // $( "#no-message-notif" ).html('');
-        // $( "#new-message-notif" ).html('<div class="alert alert-success" role="alert"> <i class="fa fa-check"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>New message ...</div>');
-        // });
+        $('#pesan').on('keyup',function(e){
+            if(e.keyCode === 13){
+                kirim_chat();
+            }
+        });
+        function pesan_baru()
+        { 
+            var pesan = $('#total-pesan').val();
+            console.log(pesan);
+            $.ajax({
+                url : "<?=site_url('/Chat/total_pesan');?>",
+                method : 'post',
+                async : true,
+                dataType : 'json',
+                success : function(data)
+                {
+                    console.log(data);
+                    if(data > pesan)
+                    {
+                        $('#notif_audio')[0].play();
+                        show_chat();
+                        $("#chatku").stop().animate({ scrollTop: $("#chatku")[0].scrollHeight}, 1000);
+                        
+                    }
+                }
+            });
+        }
+        setInterval(pesan_baru,1000);
     });
 </script>
-</body>
-
-</html>

@@ -10,18 +10,16 @@ class M_chat extends CI_Model
         $this->db->join('user','user.id = komentar.id_user');
         return $this->db->get();
     }
-    public function insert_komen($post)
+    public function insert_komen($idpemilih,$nama)
     {
         $data = [
             'id' => '',
-            'pesan' => htmlspecialchars($post['pesan']),
+            'pesan' => htmlspecialchars($idpemilih),
             'waktu' => date('Y-m-d H:i:s'),
-            'id_user' => htmlspecialchars($post['id_user'])
+            'id_user' => htmlspecialchars($nama)
         ];
         $sql = $this->db->insert('komentar',$data);
-        if($this->db->affected_rows($sql) < 1){
-            $this->session->set_flashdata('error','input komentar error');
-        }
+        
     }
     public function get_user_kelas($post)
     { 

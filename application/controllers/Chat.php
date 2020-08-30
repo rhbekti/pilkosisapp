@@ -12,8 +12,6 @@ class Chat extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Live Chat';
-        $data['chatku'] = $this->M_chat->get_all();
-		// untuk mencetak id pada navbar
         $data['user'] = $this->M_user->get($this->session->userdata('id'))->row_array();
 		$this->load->view('template/header');
 		$this->load->view('template/navbar',$data);
@@ -22,20 +20,24 @@ class Chat extends CI_Controller
 		$this->load->view('template/footer');
 		$this->load->view('user/end_chat');
     }
-    public function get_pesan_baru()
+    public function get_chat()
     {
         echo json_encode($this->M_chat->get_all()->result());
+    }
+    public function total_pesan()
+    {
+        echo json_encode(count($this->M_chat->get_all()->result()));
     }
     public function submit_pesan()
     {
         $this->form_validation->set_rules('pesan', 'Pesan', 'trim|required');
-       
+        
         if($this->form_validation->run() == FALSE){
             echo "Ada Error";
         }else{
             $arr = [
-              'id_user' =>  $this->input->post('nama'),
-              'pesan' => $this->input->post('pesan'),
+              'id_user' =>  $this->input->post('nama',True),
+              'pesan' => $this->input->post('pesan',True),
               'waktu' =>  date('Y-m-d H:i:s')
             ];
             $this->db->insert('komentar',$arr);
@@ -44,17 +46,15 @@ class Chat extends CI_Controller
             $arr['success'] = true;
         }
         echo json_encode($arr);
+        
     }
     public function user_list()
     {
-        // if($this->session->userdata('level') !== 1){
-        //     redirect('/Dashboard');
-        // }else{
         $user = $this->session->userdata('id');
         $data = $this->M_user->get($user)->row_array();
         $sort = $this->M_chat->get_user_kelas($data['kodekelas'])->result();
         echo json_encode($sort);
-        // }
     }
+    
     
 }
