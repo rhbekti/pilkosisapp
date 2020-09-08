@@ -23,6 +23,7 @@ class M_user extends CI_Model
         $this->db->join('datakelas','datakelas.kodekelas = user.kelas');
         return $this->db->get('user');
     }
+    //admin verifi
     public function get_admin($id = null)
     {
         if($id != null){

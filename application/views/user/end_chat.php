@@ -2,22 +2,6 @@
 <script>
     $(document).ready(function() {
         show_chat();
-        // // Enable pusher logging - don't include this in production
-        // Pusher.logToConsole = true;
-
-        // var pusher = new Pusher('5169da6fd6f25da82390', {
-        //     cluster: 'ap1',
-        //     forceTLS: true
-        // });
-
-        // var channel = pusher.subscribe('my-channel');
-        // channel.bind('my-event', function(data) {
-        //     if (data.message === 'success') {
-        //         show_chat();
-        //     }
-        // });
-
-
         function show_chat() {
             $.ajax({
                 url: "<?= site_url('/Chat/get_chat'); ?>",

@@ -35,13 +35,15 @@ $menu = $this->session->userdata('menu');
     MENU
   </div>
 
-  <?php if ($user['level'] == 1) { ?>
+  <?php if($user['level'] == 1 && $user['role'] == 'A') { ?>
     <!-- Menu Kandidat -->
     <li class="nav-item <?= ($menu == 'pilkosis') ? ('active bg-success') : (''); ?>">
       <a class="nav-link" href="<?= site_url('/admin/Pilkosis'); ?>">
         <i class="fas fa-fw fa-paper-plane"></i>
         <span>Pilkosis</span></a>
     </li>
+  <?php } ?>
+    <?php if ($user['level'] == 1) { ?>
     <!-- Menu Kandidat -->
     <li class="nav-item <?= ($menu == 'kandidat') ? ('active bg-success menu-open') : (''); ?>">
       <a class="nav-link <?= ($menu == 'kandidat') ? ('') : ('collapsed'); ?>" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -63,7 +65,7 @@ $menu = $this->session->userdata('menu');
     </li>
     <!-- Menu Data Pengguna -->
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
+      <a class="nav-link <?= ($menu == 'data_petugas') ? ('active bg-success') : (''); ?>" href="<?= site_url('/admin/Petugas') ?>">
         <i class="fas fa-fw fa-user"></i>
         <span>Data Petugas</span></a>
     </li>
@@ -81,7 +83,6 @@ $menu = $this->session->userdata('menu');
     <i class="fas fa-fw fa-book"></i>
     <span>Panduan Pilkosis</span></a>
   </li>
-  <?php } ?>
   <!-- Divider -->
   <hr class="sidebar-divider">
 
@@ -91,11 +92,11 @@ $menu = $this->session->userdata('menu');
   </div>
   <!-- Nav Item - Charts -->
   <li class="nav-item">
-    <a class="nav-link" href="charts.html">
-      <i class="fas fa-fw fa-user"></i>
-      <span>Profil</span></a>
+    <a class="nav-link" href="<?=site_url('/Chat');?>">
+      <i class="fab fa-fw fa-whatsapp"></i>
+      <span>Chat</span></a>
   </li>
-
+  <?php } ?>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
     <a class="nav-link" href="<?= base_url('/Login/logout'); ?>" data-toggle="modal" data-target="#logoutModal">

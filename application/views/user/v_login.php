@@ -8,15 +8,15 @@
     Pilkosis
   </title>
   <!-- Favicon -->
-  <link href="<?=base_url()?>/assets/argon/assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <link href="<?= base_url() ?>/assets/images/kpo.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="<?=base_url()?>/assets/argon/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="<?=base_url()?>/assets/argon/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="<?= base_url() ?>/assets/argon/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="<?= base_url() ?>/assets/argon/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="<?=base_url()?>/assets/argon/assets/css/argon-dashboard.css?v=1.1.1" rel="stylesheet" />
-  <link href="<?=base_url()?>/assets/sbadmin/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+  <link href="<?= base_url() ?>/assets/argon/assets/css/argon-dashboard.css?v=1.1.1" rel="stylesheet" />
+  <link href="<?= base_url() ?>/assets/sbadmin/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 </head>
 
 <body class="bg-default">
@@ -24,8 +24,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
-        <a class="navbar-brand" href="<?=base_url()?>/assets/argon/index.html">
-        <h2>PILKOSIS</h2>
+        <a class="navbar-brand" href="<?= base_url() ?>/assets/argon/index.html">
+          <h2>PILKOSIS</h2>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -48,17 +48,17 @@
           <!-- Navbar items -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="<?=base_url()?>/assets/argon/index.html">
+              <a class="nav-link nav-link-icon" href="<?= base_url() ?>/assets/argon/index.html">
                 <i class="ni ni-planet"></i>
                 <span class="nav-link-inner--text">Tentang</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="<?=base_url()?>/assets/argon/examples/register.html">
+              <a class="nav-link nav-link-icon" href="<?= base_url() ?>/assets/argon/examples/register.html">
                 <i class="ni ni-circle-08"></i>
                 <span class="nav-link-inner--text">Daftar</span>
               </a>
-            </li>   
+            </li>
           </ul>
         </div>
       </div>
@@ -90,26 +90,26 @@
               <div class="text-center font-weight-bold mb-4">
                 Login
                 <br>
-                <?=$this->session->flashdata('info');?>
+                <?= $this->session->flashdata('info'); ?>
               </div>
-              <form role="form" action="<?=site_url('/Login/validasi');?>" method="post">
+              <form role="form" action="<?= site_url('/Login/validasi'); ?>" method="post">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Nis/Username" type="text" name="username" value="<?=set_value('username');?>">
+                    <input class="form-control" placeholder="Nis/Username" type="text" name="username" value="<?= set_value('username'); ?>" autocomplete="off">
                   </div>
-                  <?= form_error('username','<small class="text-danger">','</small>'); ?>
+                  <?= form_error('username', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="password">
+                    <input class="form-control" placeholder="Password" type="password" name="password" id="password">
                   </div>
-                  <?= form_error('password','<small class="text-danger">','</small>'); ?>
+                  <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id="tampilPass" type="checkbox">
@@ -131,7 +131,7 @@
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
-              © <?=date('Y')?> <a href="#" class="font-weight-bold ml-1">Unity Dev</a>
+              © <?= date('Y') ?> <a href="#" class="font-weight-bold ml-1">Unity Dev</a>
             </div>
           </div>
           <div class="col-xl-6">
@@ -140,7 +140,7 @@
                 <a href="#" class="nav-link">Powered By</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fas fa-code"></i> Archer  Syntax</a>
+                <a href="#" class="nav-link"><i class="fas fa-code"></i> Archer Syntax</a>
               </li>
             </ul>
           </div>
@@ -149,13 +149,19 @@
     </footer>
   </div>
   <!--   Core   -->
-  <script src="<?=base_url()?>/assets/argon/assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="<?=base_url()?>/assets/argon/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>/assets/argon/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="<?= base_url() ?>/assets/argon/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--   Optional JS   -->
   <!--   Argon JS   -->
-  <script src="<?=base_url()?>/assets/argon/assets/js/argon-dashboard.min.js?v=1.1.1"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script src="<?=base_url()?>/assets/sbadmin/vendor/sweetalert2/sweetalert2.min.js"></script>
+  <script src="<?= base_url() ?>/assets/argon/assets/js/argon-dashboard.min.js?v=1.1.1"></script>
+  <script src="<?= base_url() ?>/assets/sbadmin/vendor/sweetalert2/sweetalert2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tampilPass').click(function() {
+        $(this).is(':checked') ? $('#password').attr('type', 'text') : $('#password').attr('type', 'password');
+      });
+    });
+  </script>
 </body>
 
 </html>
