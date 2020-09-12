@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2020 at 02:46 PM
+-- Generation Time: Sep 12, 2020 at 04:34 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.14
 
@@ -34,7 +34,7 @@ CREATE TABLE `administrator` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `level` int(11) NOT NULL,
-  `histori` datetime NOT NULL,
+  `role` varchar(4) NOT NULL,
   `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -42,8 +42,10 @@ CREATE TABLE `administrator` (
 -- Dumping data for table `administrator`
 --
 
-INSERT INTO `administrator` (`id`, `nama`, `username`, `password`, `level`, `histori`, `foto`) VALUES
-(1, 'Rhbekti', 'rhbekti', '32b247357d198e25c00581b99b792d50ed740de1', 1, '2020-07-31 14:16:55', 'bekti.jpg');
+INSERT INTO `administrator` (`id`, `nama`, `username`, `password`, `level`, `role`, `foto`) VALUES
+(1, 'Rhbekti', 'rhbekti', '32b247357d198e25c00581b99b792d50ed740de1', 1, 'A', 'bekti.png'),
+(7, 'Akira Wahyu S', 'akira', '4b364a37092ff71414d9089d3ded6e14f60d5edf', 1, 'A', 'admin200912-a5cbe770b5.jpg'),
+(8, 'Finna Anggi Lestari', 'finaketos', '7c64798b0d735f19e116349d6b5ed183fa008b70', 1, 'B', 'admin200912-aa8088d69b.png');
 
 -- --------------------------------------------------------
 
@@ -159,13 +161,6 @@ CREATE TABLE `data_voting` (
   `waktu` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `data_voting`
---
-
-INSERT INTO `data_voting` (`id`, `id_user`, `no_kandidat`, `waktu`) VALUES
-(6, 1498, 3, '2020-08-25 21:31:36');
-
 -- --------------------------------------------------------
 
 --
@@ -182,15 +177,6 @@ CREATE TABLE `kandidat` (
   `foto` varchar(200) NOT NULL,
   `jumlah_suara` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kandidat`
---
-
-INSERT INTO `kandidat` (`id`, `ketua`, `wakil`, `visi`, `misi`, `proker`, `foto`, `jumlah_suara`) VALUES
-(1, 'Finna Anggi', 'Anggi Lestari', 'oops', 'oop', 'oops', 'foto200808-abcb458652.png', 1),
-(2, 'Ora Reti', 'Tes Bae', '<p>berjuang untuk meraih hasil</p>', 'berhasil di kemudian hari', 'Menjaga hati dan perasaan', 'foto200822-52f49174c2.png', 2),
-(3, 'Rahman ', 'Pambekti', '     hanya untuk coba coba ', ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam deleniti cum asperiores maxime temporibus sit dicta amet veniam animi. Iusto error eum quos, aperiam in tempora asperiores accusantium dolore.    ', ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam deleniti cum asperiores maxime temporibus sit dicta amet veniam animi. Iusto error eum quos, aperiam in tempora asperiores accusantium dolore.    ', 'foto200822-01d1f8a41b.png', 3);
 
 -- --------------------------------------------------------
 
@@ -210,7 +196,13 @@ CREATE TABLE `komentar` (
 --
 
 INSERT INTO `komentar` (`id`, `pesan`, `waktu`, `id_user`) VALUES
-(1, 'testing', '2020-08-27 09:44:31', 1498);
+(3, 'halo', '2020-09-12 07:33:38', 8),
+(4, 'oke', '2020-09-12 07:35:30', 8),
+(5, 'haloo', '2020-09-12 07:39:43', 8),
+(6, 'oke', '2020-09-12 07:45:38', 1),
+(7, 'hai semua', '2020-09-12 07:49:37', 1),
+(8, 'perkenalkan saya admin pilkosis', '2020-09-12 07:50:53', 1),
+(9, 'hmm ana ana wae', '2020-09-12 07:57:29', 8);
 
 -- --------------------------------------------------------
 
@@ -238,33 +230,6 @@ INSERT INTO `level` (`id_level`, `nama_level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
---
-
-CREATE TABLE `message` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `subject` varchar(100) NOT NULL,
-  `message` text NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `read_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`id`, `name`, `email`, `subject`, `message`, `created_at`, `read_status`) VALUES
-(1, 'Rahman Pambekti', 'rhbekti.ac.id@gmail.com', 'testing', 'halo rahman', '2020-08-25 06:56:28', 1),
-(2, 'tika', 'rhbekti@gmail.com', 'testing 2', 'halo halo\n', '2020-08-25 06:59:05', 1),
-(3, 'fakih', 'sandhikagalih@gmail.com', 'dsasda', 'sadds', '2020-08-25 06:59:49', 1),
-(4, 'Rahman Pambekti', 'rhbekti.ac.id@gmail.com', 'balasan', 'oke sip', '2020-08-25 07:02:16', 1),
-(5, 'asdaads', 'sandhikagalih@gmail.com', 'adsasd', 'asdsdsda', '2020-08-25 08:20:47', 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `setting`
 --
 
@@ -276,13 +241,6 @@ CREATE TABLE `setting` (
   `jamtutup` time NOT NULL,
   `id_admin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `setting`
---
-
-INSERT INTO `setting` (`id`, `tglawal`, `tglakhir`, `jambuka`, `jamtutup`, `id_admin`) VALUES
-(1, '2020-08-25', '2020-08-25', '08:40:05', '12:40:06', 1);
 
 -- --------------------------------------------------------
 
@@ -362,7 +320,7 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`, `kelas`, `sta
 (33, 'HIMAWATI SETYANINGRUM, S.Pd.', 'himawati@pilkosis', 'VfvT8b', 3, 'A2', 0),
 (34, 'LINA RAHMAWATI, S.Pd. ', 'linarahmawati@pilkosis', 'zw7XvP', 3, 'A2', 0),
 (35, 'HENI PURWANINGSIH, S.Pd. ', 'henipurwaningsih@pilkosis', 'LN2Ig1', 3, 'A2', 0),
-(36, 'NUGROHO BUDHI R, S.T.', 'nugrohobudi@pilkosis', 'WuggsM', 3, 'A2', 0),
+(36, 'NUGROHO BUDHI R, S.T.', 'nugrohobudi@pilkosis', 'WuggsM', 3, 'A2', 1),
 (37, 'M. JAMALUDDIN AL-HASANI, S.Psi, M.Pd ', 'mjamaluddin@pilkosis', 'Cu5FoD', 3, 'A2', 0),
 (38, 'AFRI YUDI HASTUTI, S.Pd.', 'afriyudihastuti@pilkosis', 'Qu9o3U', 3, 'A2', 0),
 (39, 'SITI FADILATUN, S.Pd. ', 'sitifadilatun@pilkosis', 'QguTNG', 3, 'A2', 0),
@@ -1837,7 +1795,7 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`, `kelas`, `sta
 (1507, 'YUNI SATIYA BAROKAH', '14795', '3Trx0k', 2, 'MM', 0),
 (1508, 'YUSRIL IHZA PRASETYA', '14796', 'RNkmBM', 2, 'MM', 0),
 (1509, 'AGISTA MUTIARA AULIA ', '14797', 'LgRkrR', 2, 'NN', 0),
-(1510, 'AKIRA WAHYU SAPUTRA', '14798', 'xv6PUr', 2, 'NN', 0),
+(1510, 'AKIRA WAHYU SAPUTRA', '14798', 'ogplupa', 2, 'NN', 2),
 (1511, 'ALFI AMALIAH AZIZAH', '14799', 'LGWxTo', 2, 'NN', 0),
 (1512, ' AMELIA JANU FITRIANI', '14800', 'xX7hs2', 2, 'NN', 0),
 (1513, 'ANGGUN DWI RAHAYU ', '14801', 'tmMHkr', 2, 'NN', 0),
@@ -1864,7 +1822,7 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`, `kelas`, `sta
 (1534, 'NURUL HIDAYAH', '14822', 'AinLal', 2, 'NN', 0),
 (1535, 'NURUL HIKMAH ', '14823', 'QTVdwK', 2, 'NN', 0),
 (1536, 'NURUL IZZA', '14824', 'wAs9rt', 2, 'NN', 0),
-(1537, 'RAHMA NUR ARISKA ', '14825', '2200CX', 2, 'NN', 0),
+(1537, 'RAHMA NUR ARISKA ', '14825', '2200CX', 2, 'NN', 1),
 (1538, 'SAFIRA DELFIANI SAFITRI', '14826', 'betfHa', 2, 'NN', 0),
 (1539, 'SULISTYANINGSIH ', '14827', 'KGRVpU', 2, 'NN', 0),
 (1540, 'TIA IVANA', '14828', 'qTr0gE', 2, 'NN', 0),
@@ -1954,6 +1912,7 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`, `kelas`, `sta
 --
 ALTER TABLE `administrator`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `level` (`level`);
 
 --
@@ -2006,12 +1965,6 @@ ALTER TABLE `level`
   ADD PRIMARY KEY (`id_level`);
 
 --
--- Indexes for table `message`
---
-ALTER TABLE `message`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `setting`
 --
 ALTER TABLE `setting`
@@ -2041,7 +1994,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `berita`
@@ -2059,19 +2012,13 @@ ALTER TABLE `biodata`
 -- AUTO_INCREMENT for table `data_voting`
 --
 ALTER TABLE `data_voting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `message`
---
-ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`

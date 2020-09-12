@@ -43,7 +43,7 @@ $menu = $this->session->userdata('menu');
         <span>Pilkosis</span></a>
     </li>
   <?php } ?>
-  <?php if ($user['level'] == 1) { ?>
+  <?php if ($user['level'] == 1 && $user['role'] == 'A' || $user['role'] == 'B') { ?>
     <!-- Menu Kandidat -->
     <li class="nav-item <?= ($menu == 'kandidat') ? ('active bg-success menu-open') : (''); ?>">
       <a class="nav-link <?= ($menu == 'kandidat') ? ('') : ('collapsed'); ?>" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -63,6 +63,8 @@ $menu = $this->session->userdata('menu');
         <i class="fas fa-fw fa-users"></i>
         <span>Data User</span></a>
     </li>
+  <? } ?>
+  <?php if($user['level'] == 1 && $user['role'] == 'A' || $user['role'] == 'B' || $user['role'] == 'C'){ ?>
     <!-- Menu Data Pengguna -->
     <li class="nav-item">
       <a class="nav-link <?= ($menu == 'data_petugas') ? ('active bg-success') : (''); ?>" href="<?= site_url('/admin/Petugas') ?>">
