@@ -4,7 +4,7 @@
         show_chat();
         function show_chat() {
             $.ajax({
-                url: "<?= site_url('/Chat/get_chat'); ?>",
+                url: "<?= site_url('/admin/Chat/get_chat'); ?>",
                 method: 'post',
                 async: true,
                 dataType: 'json',
@@ -16,7 +16,7 @@
                     for (i = 0; i < data.length; i++) {
                         html += '<div class="row mt-3">' +
                             '<div class="col-2 col-md-2 text-center">' +
-                            '<img src="<?= base_url('/assets/images/'); ?>default.png" class="img-fluid rounded-circle" style="height:40px;width:40px;">' +
+                            '<img src="<?= base_url('/uploads/images/'); ?>'+data[i].foto+'" class="img-fluid rounded-circle" style="height:50px;width:50px;">' +
                             '</div>' +
                             '<div class="col-10 col-md-10">'+
                             '<div class ="alert alert-success"  role="alert">'+
@@ -47,7 +47,7 @@
                 pesan: $('#pesan').val()
             }
             $.ajax({
-                url : "<?=site_url('/Chat/submit_pesan');?>",
+                url : "<?=site_url('/admin/Chat/submit_pesan');?>",
                 method : 'POST',
                 data : pesan,
                 async: true,
@@ -58,7 +58,7 @@
                     if (data.success == true) {
                         $('#chatku').append(`<div class="row mt-2">
                         <div class="col-2 text-center">
-                            <img src="<?= base_url('/assets/images/');?>default.png" class="img-fluid rounded-circle" alt="foto" style="width: 40px;height:40px;">
+                            <img src="<?= base_url('/uploads/images/');?>`+data.foto+`" class="img-fluid rounded-circle" alt="foto" style="width: 40px;height:40px;">
                         </div>
                         <div class="col-10">
                             <div class ="alert alert-success"  role="alert">
@@ -92,9 +92,9 @@
         function pesan_baru()
         { 
             var pesan = $('#total-pesan').val();
-            console.log(pesan);
+            
             $.ajax({
-                url : "<?=site_url('/Chat/total_pesan');?>",
+                url : "<?=site_url('/admin/Chat/total_pesan');?>",
                 method : 'post',
                 async : true,
                 dataType : 'json',

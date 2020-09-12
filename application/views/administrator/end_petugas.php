@@ -39,18 +39,18 @@ $(document).ready(function(){
                     "data": "nama"
                 },
                 {
-                    "data":"username"
-                },
-                {
                     "data" : "nama_level"
                 },
                 {
-                    "data" : "role"
+                    "data" : "foto"
+                },
+                {
+                    "data" : "hapus"
                 }
 
             ],
             order: [
-                [1, 'asc']
+                [2, 'asc']
             ],
             rowCallback: function(row, data, iDisplayIndex) {
                 var info = this.fnPagingInfo();
@@ -62,6 +62,11 @@ $(document).ready(function(){
 
         });
         // end setup datatables
+        $('#tblpetugas').on('click','.btn-hapus',function(){
+            var id = $(this).data('id');
+            $('#Modalhapus').modal('show');
+            $('[name="idpetugashapus"]').val(id);
+        });
 });
 </script>
 </body>

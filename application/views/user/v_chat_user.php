@@ -17,7 +17,7 @@
         </div>
     </section>
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12">
         <div id="notif"></div>
             <div class="card shadow">
                 <div class="card-body overflow-auto" style="height: 60vh;" id="chatku">
@@ -29,33 +29,13 @@
                             <div class="input-group mb-3">
                                 <input type="hidden" name="total" id="total-pesan">
                                 <input type="hidden" name="nama" value="<?=$user['id'];?>" id="nama">
-                                <input type="text" name="pesan" class="form-control" placeholder="ketik pesan..." id="pesan">
+                                <input type="text" name="pesan" class="form-control" placeholder="ketik pesan..." id="pesan" autofocus>
                                 <div class="input-group-append">
                                     <button class="btn btn-success" type="button" id="tombol-kirim">Kirim</button>
                                 </div>
                             </div>
                         </div>
                    
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="card shadow">
-                <div class="card-header">
-                    <h5 class="font-weight-bold">User</h5>
-                </div>
-                <div class="card-body overflow-auto" style="height: 60vh;">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbluser">
-                           
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

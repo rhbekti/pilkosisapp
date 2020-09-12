@@ -35,7 +35,7 @@ $menu = $this->session->userdata('menu');
     MENU
   </div>
 
-  <?php if($user['level'] == 1 && $user['role'] == 'A') { ?>
+  <?php if ($user['level'] == 1 && $user['role'] == 'A') { ?>
     <!-- Menu Kandidat -->
     <li class="nav-item <?= ($menu == 'pilkosis') ? ('active bg-success') : (''); ?>">
       <a class="nav-link" href="<?= site_url('/admin/Pilkosis'); ?>">
@@ -43,7 +43,7 @@ $menu = $this->session->userdata('menu');
         <span>Pilkosis</span></a>
     </li>
   <?php } ?>
-    <?php if ($user['level'] == 1) { ?>
+  <?php if ($user['level'] == 1) { ?>
     <!-- Menu Kandidat -->
     <li class="nav-item <?= ($menu == 'kandidat') ? ('active bg-success menu-open') : (''); ?>">
       <a class="nav-link <?= ($menu == 'kandidat') ? ('') : ('collapsed'); ?>" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -52,7 +52,7 @@ $menu = $this->session->userdata('menu');
       </a>
       <div id="collapseUtilities" class="collapse <?= ($menu == 'kandidat') ? ('show') : (''); ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="<?=site_url('/admin/Kandidat/biodata');?>">Biodata Kandidat</a>
+          <a class="collapse-item" href="<?= site_url('/admin/Kandidat/biodata'); ?>">Biodata Kandidat</a>
           <a class="collapse-item" href="<?= site_url('/admin/Kandidat') ?>">Data Kandidat</a>
         </div>
       </div>
@@ -69,33 +69,33 @@ $menu = $this->session->userdata('menu');
         <i class="fas fa-fw fa-user"></i>
         <span>Data Petugas</span></a>
     </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+      <a class="nav-link <?= ($menu == 'data_chat') ? ('active bg-success') : (''); ?>" href="<?= site_url('/admin/Chat'); ?>">
+        <i class="fab fa-fw fa-whatsapp"></i>
+        <span>Chat</span></a>
+    </li>
   <?php } ?>
-  <?php if($user['level'] != 1){ ?>
-  <!-- Menu Data Pengguna -->
-  <li class="nav-item <?= ($menu == 'user_menu') ? ('active bg-success') : (''); ?>">
-    <a class="nav-link" href="<?=site_url('/Dashboard');?>">
-      <i class="fas fa-fw fa-home"></i>
-      <span>Beranda</span></a>
-  </li>
-  <!-- Menu Data Panduan -->
-  <li class="nav-item <?= ($menu == 'user_panduan') ? ('active bg-success') : (''); ?>">
-    <a class="nav-link" href="<?=site_url('/Panduan_user');?>">
-    <i class="fas fa-fw fa-book"></i>
-    <span>Panduan Pilkosis</span></a>
-  </li>
-  <!-- Divider -->
-  <hr class="sidebar-divider">
+  <?php if ($user['level'] != 1 && $user['level'] != 6) { ?>
+    <!-- Menu Data Pengguna -->
+    <li class="nav-item <?= ($menu == 'user_menu') ? ('active bg-success') : (''); ?>">
+      <a class="nav-link" href="<?= site_url('/Dashboard'); ?>">
+        <i class="fas fa-fw fa-home"></i>
+        <span>Beranda</span></a>
+    </li>
+    <!-- Menu Data Panduan -->
+    <li class="nav-item <?= ($menu == 'user_panduan') ? ('active bg-success') : (''); ?>">
+      <a class="nav-link" href="<?= site_url('/Panduan_user'); ?>">
+        <i class="fas fa-fw fa-book"></i>
+        <span>Panduan Pilkosis</span></a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    USER
-  </div>
-  <!-- Nav Item - Charts -->
-  <li class="nav-item">
-    <a class="nav-link" href="<?=site_url('/Chat');?>">
-      <i class="fab fa-fw fa-whatsapp"></i>
-      <span>Chat</span></a>
-  </li>
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      USER
+    </div>
   <?php } ?>
   <!-- Nav Item - Tables -->
   <li class="nav-item">

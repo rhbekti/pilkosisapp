@@ -3,6 +3,8 @@
         load_total();
         grafik_suara();
         persen_pemilih();
+        total_suara_masuk();
+        belum_memilih();
         $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
             return {
                 "iStart": oSettings._iDisplayStart,
@@ -113,13 +115,13 @@
         const det = $('.infoaksi').data('info');
         if (Aksi == 'sukses') {
             Swal.fire({
-                title: 'Data Kandidat',
-                text: 'Data Berhasil ' + det,
+                title: 'Informasi',
+                text:  det,
                 type: 'success'
             });
         } else if (Aksi == 'error') {
             Swal.fire({
-                title: 'Data Kandidat',
+                title: 'Informasi',
                 text: det,
                 type: 'error'
             });
@@ -164,13 +166,37 @@
                 async : false,
                 dataType : 'json',
                 success : function(r){
-                    console.log(r.toFixed(0));
-                    $('#persen-pemilih').html(r+'%');
-                    $('#prog-pemilih').css("width:"+r+"%");
+                    var dt = r.toFixed(0);
+                    $('#persen-pemilih').html(dt);
                 }
             })
         }
-
+        function belum_memilih()
+        {
+            $.ajax({
+                url : "<?=site_url('/admin/Dashboard/belum_memilih');?>",
+                method : 'post',
+                async : false,
+                dataType : 'json',
+                success : function(r){
+                    $('#belum-memilih').html(r);
+                }
+            })
+        }
+        function total_suara_masuk()
+        {
+            $.ajax({
+                url : "<?=site_url('/admin/Dashboard/get_jumlah_suara')?>",
+                method : 'post',
+                async : false,
+                dataType : 'json',
+                success : function(rh){
+                    $.each(rh,function(i,item){
+                        $('#total-suara-masuk').html(item.total_suara);
+                    });
+                }
+            });
+        }
         function number_format(number, decimals, dec_point, thousands_sep) {
             // *     example: number_format(1234.56, 2, ',', ' ');
             // *     return: '1 234,56'

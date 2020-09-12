@@ -6,13 +6,14 @@ class Chat extends CI_Controller
     {
         parent::__construct();
         date_default_timezone_set('Asia/Jakarta');
-        $this->load->model(['M_chat','M_user']);
+        $this->load->model(['M_chat','M_pilkosis','M_user']);
+        $this->session->set_userdata('menu','data_chat');
         cek_login();
     }
     public function index()
     {
-        $data['judul'] = 'Live Chat';
-        $data['user'] = $this->M_user->get($this->session->userdata('id'))->row_array();
+        $data['judul'] = 'Chatingku';
+        $data['user'] = $this->M_user->get_admin($this->session->userdata('id'))->row_array();
 		$this->load->view('template/header');
 		$this->load->view('template/navbar',$data);
 		$this->load->view('template/sidebar');
@@ -41,20 +42,14 @@ class Chat extends CI_Controller
               'waktu' =>  date('Y-m-d H:i:s')
             ];
             $this->db->insert('komentar',$arr);
-            $sql = $this->M_user->get($this->input->post('nama'))->row();
+            $sql = $this->M_pilkosis->get_petugas($this->input->post('nama'))->row();
             $arr['nama'] = $sql->nama;
+            $arr['foto'] = $sql->foto;
             $arr['success'] = true;
         }
         echo json_encode($arr);
         
     }
-    public function user_list()
-    {
-        $user = $this->session->userdata('id');
-        $data = $this->M_user->get($user)->row_array();
-        $sort = $this->M_chat->get_user_kelas($data['kodekelas'])->result();
-        echo json_encode($sort);
-    }
-    
+   
     
 }

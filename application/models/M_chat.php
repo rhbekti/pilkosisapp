@@ -4,10 +4,10 @@ class M_chat extends CI_Model
 {
     public function get_all()
     {
-        $this->db->select('komentar.id as idkomen,waktu,pesan,user.nama');
+        $this->db->select('komentar.id as idkomen,waktu,pesan,administrator.nama,administrator.foto');
         $this->db->from('komentar');
         $this->db->order_by('idkomen','asc');
-        $this->db->join('user','user.id = komentar.id_user');
+        $this->db->join('administrator','administrator.id = komentar.id_user');
         return $this->db->get();
     }
     public function insert_komen($idpemilih,$nama)

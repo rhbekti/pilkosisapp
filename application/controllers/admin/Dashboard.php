@@ -34,9 +34,19 @@ class Dashboard extends CI_Controller
     }
     public function get_persen_pemilih()
     {
+        $data = $this->db->get('data_voting')->result();
+        echo json_encode(count($data));
+    }
+    public function belum_memilih()
+    {
         $pemilih = $this->db->get('data_voting')->result();
-        $total = $this->db->get('user')->result();
-        $data = 1616 / count($total) * 100;
+        $user = $this->db->get('user')->result();
+        $data = count($user) - count($pemilih);
+        echo json_encode($data);
+    }
+    public function get_jumlah_suara()
+    {
+        $data = $this->M_pilkosis->total_suara()->result();
         echo json_encode($data);
     }
 }
