@@ -43,7 +43,7 @@ $menu = $this->session->userdata('menu');
         <span>Pilkosis</span></a>
     </li>
   <?php } ?>
-  <?php if ($user['level'] == 1 && $user['role'] == 'A' || $user['role'] == 'B') { ?>
+  <?php if ($user['level'] == 1 && $user['role'] == 'A') { ?>
     <!-- Menu Kandidat -->
     <li class="nav-item <?= ($menu == 'kandidat') ? ('active bg-success menu-open') : (''); ?>">
       <a class="nav-link <?= ($menu == 'kandidat') ? ('') : ('collapsed'); ?>" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -63,8 +63,42 @@ $menu = $this->session->userdata('menu');
         <i class="fas fa-fw fa-users"></i>
         <span>Data User</span></a>
     </li>
-  <? } ?>
-  <?php if($user['level'] == 1 && $user['role'] == 'A' || $user['role'] == 'B' || $user['role'] == 'C'){ ?>
+  <?php }
+   elseif($user['level'] == 1 && $user['role'] == 'B'){ ?>
+   <!-- Menu Kandidat -->
+   <li class="nav-item <?= ($menu == 'kandidat') ? ('active bg-success menu-open') : (''); ?>">
+      <a class="nav-link <?= ($menu == 'kandidat') ? ('') : ('collapsed'); ?>" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-user-tie"></i>
+        <span>Kandidat</span>
+      </a>
+      <div id="collapseUtilities" class="collapse <?= ($menu == 'kandidat') ? ('show') : (''); ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="<?= site_url('/admin/Kandidat/biodata'); ?>">Biodata Kandidat</a>
+          <a class="collapse-item" href="<?= site_url('/admin/Kandidat') ?>">Data Kandidat</a>
+        </div>
+      </div>
+    </li>
+    <!-- Menu Data User -->
+    <li class="nav-item <?= ($menu == 'data_user') ? ('active bg-success') : (''); ?>">
+      <a class="nav-link" href="<?= site_url('/admin/Data_user') ?>">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Data User</span></a>
+    </li>
+   <?php } ?>
+  <?php if($user['level'] == 1 && $user['role'] == 'A'){ ?>
+    <!-- Menu Data Pengguna -->
+    <li class="nav-item">
+      <a class="nav-link <?= ($menu == 'data_petugas') ? ('active bg-success') : (''); ?>" href="<?= site_url('/admin/Petugas') ?>">
+        <i class="fas fa-fw fa-user"></i>
+        <span>Data Petugas</span></a>
+    </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+      <a class="nav-link <?= ($menu == 'data_chat') ? ('active bg-success') : (''); ?>" href="<?= site_url('/admin/Chat'); ?>">
+        <i class="fab fa-fw fa-whatsapp"></i>
+        <span>Chat</span></a>
+    </li>
+  <?php }elseif($user['level'] == 1 && $user['role'] == 'A'){ ?>
     <!-- Menu Data Pengguna -->
     <li class="nav-item">
       <a class="nav-link <?= ($menu == 'data_petugas') ? ('active bg-success') : (''); ?>" href="<?= site_url('/admin/Petugas') ?>">

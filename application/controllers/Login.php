@@ -41,7 +41,7 @@ class Login extends CI_Controller
 					'id' => $user->id,
 					'username' => $user->username,
 					'level' => $user->level,
-					'kelas' => $user->namakelas,
+					'kelas' => $user->namakelas
 				];
 				$this->M_user->update_status($param['id']);
 				$this->session->set_userdata($param);
